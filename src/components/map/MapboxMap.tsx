@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapboxMapProps {
   latitude: number;
@@ -9,29 +8,44 @@ interface MapboxMapProps {
   zoom?: number;
 }
 
-export function MapboxMap({ latitude, longitude, zoom = 11 }: MapboxMapProps) {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+export function MapboxMap({ latitude, longitude, zoom = 12 }: MapboxMapProps) {
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<any>(null);
 
   useEffect(() => {
-    if (!mapRef.current || !token) return;
-    let map: any;
-    import("mapbox-gl").then((mapboxgl) => {
-      mapboxgl.default.accessToken = token;
-      map = new mapboxgl.default.Map({
-        container: mapRef.current!,
+    if (!mapContainer.current || mapRef.current) return;
+    const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+    if (!token) return;
+
+    import("mapbox-gl").then(({ default: mapboxgl }) => {
+      import("mapbox-gl/dist/mapbox-gl.css" as any);
+      mapboxgl.accessToken = token;
+
+      const map = new mapboxgl.Map({
+        container: mapContainer.current!,
         style: "mapbox://styles/mapbox/light-v11",
         center: [longitude, latitude],
         zoom,
       });
-      new mapboxgl.default.Marker({ color: "#0f1f3d" })
-        .setLngLat([longitude, latitude])
-        .addTo(map);
-      map.addControl(new mapboxgl.default.NavigationControl(), "top-right");
-      map.scrollZoom.disable();
-    });
-    return () => map?.remove();
-  }, [latitude, longitude, zoom, token]);
 
-  return <div ref={mapRef} className="w-full h-full" />;
+      mapRef.current = map;
+
+      map.on("load", () => {
+        new mapboxgl.Marker({ color: "#0f1f3d" })
+          .setLngLat([longitude, latitude])
+          .addTo(map);
+        map.addControl(new mapboxgl.NavigationControl(), "top-right");
+        map.scrollZoom.disable();
+      });
+    });
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, [latitude, longitude, zoom]);
+
+  return <div ref={mapContainer} className="w-full h-full" />;
 }
