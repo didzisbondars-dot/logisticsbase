@@ -47,5 +47,5 @@ export function MapboxMap({ latitude, longitude, zoom = 12 }: MapboxMapProps) {
     };
   }, [latitude, longitude, zoom]);
 
-  return <div ref={mapContainer} className="w-full h-full" />;
+  return <div ref={mapContainer} className="w-full h-full" style={{ minHeight: "340px", background: "#e8e8e8" }} />;
 }
