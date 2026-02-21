@@ -52,7 +52,7 @@ export function Navbar() {
                 scrolled || !isHome ? "text-[var(--brand-navy)]" : "text-white"
               )}
             >
-              OfficeBase
+              LogisticsBase
             </span>
           </Link>
 

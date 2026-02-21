@@ -8,14 +8,14 @@ import { Toaster } from "@/components/ui/toaster";
 export const metadata: Metadata = {
   title: {
     template: "%s | LogisticsBase",
-    default: "LogisticsBase — Premium Office Project Aggregator",
+    default: "LogisticsBase — Logistics & Industrial Properties in Riga",
   },
   description:
-    "Discover and compare the finest office projects across the city. Grade A offices, co-working spaces, and mixed-use developments.",
-  keywords: ["office", "commercial real estate", "office space", "Grade A"],
+    "Discover and compare logistics parks, warehouses and industrial properties in Riga.",
+  keywords: ["logistics", "warehouse", "industrial", "logistics park", "Riga"],
   openGraph: {
     title: "LogisticsBase",
-    description: "Premium Office Project Aggregator",
+    description: "Logistics & Industrial Property Aggregator",
     type: "website",
   },
 };

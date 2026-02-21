@@ -10,7 +10,7 @@ export const revalidate = 300; // revalidate every 5 minutes
 const stats = [
   { label: "Active Projects", value: "120+", icon: Building2 },
   { label: "Cities Covered", value: "12", icon: MapPin },
-  { label: "Grade A Buildings", value: "85%", icon: TrendingUp },
+  { label: "Class A Properties", value: "85%", icon: TrendingUp },
   { label: "Verified Listings", value: "100%", icon: Shield },
 ];
 
@@ -54,7 +54,7 @@ export default async function HomePage() {
             </h1>
 
             <p className="text-base text-white/70 leading-relaxed mb-6 max-w-xl animate-fade-up stagger-2">
-              Curated Grade A logisticss, co-working spaces, and mixed-use developments. Compare projects, explore on the map, and connect with developers directly.
+              Curated logistics parks, warehouses and industrial properties across Riga. Compare facilities, explore on the map, and connect with developers directly.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 animate-fade-up stagger-3">
