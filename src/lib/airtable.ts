@@ -5,7 +5,7 @@ const base = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY,
 }).base(process.env.AIRTABLE_BASE_ID!);
 
-const PROJECTS_TABLE = process.env.AIRTABLE_PROJECTS_TABLE || "Projects";
+const PROJECTS_TABLE = process.env.AIRTABLE_PROJECTS_TABLE || "Industrial Base";
 const LEADS_TABLE = process.env.AIRTABLE_LEADS_TABLE || "Leads";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
