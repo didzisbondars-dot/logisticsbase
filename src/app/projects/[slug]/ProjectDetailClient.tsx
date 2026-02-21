@@ -22,13 +22,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
   }, []);
 
   const stats = [
-    { label: "Total Area", value: project.totalArea ? formatArea(project.totalArea) : null },
-    { label: "GLA", value: project.minUnitSize ? formatArea(project.minUnitSize) : null },
+    { label: "Total GBA", value: project.totalArea ? formatArea(project.totalArea) : null },
+    { label: "Vacancy", value: project.minUnitSize ? formatArea(project.minUnitSize) : null },
     { label: "Available", value: (project as any).availableArea ? formatArea((project as any).availableArea) : null },
     { label: "Owner", value: project.developer || null },
     { label: "District", value: project.district || null },
     { label: "Class", value: project.propertyType ? `Class ${project.propertyType}` : null },
-    { label: "Ground Parking", value: (project as any).parkingGround ? `${(project as any).parkingGround} spaces` : null },
+    { label: "Ceiling Height (m)", value: (project as any).parkingGround ? `${(project as any).parkingGround} spaces` : null },
     { label: "Underground", value: (project as any).parkingUnderground ? `${(project as any).parkingUnderground} spaces` : null },
   ].filter(s => s.value);
 

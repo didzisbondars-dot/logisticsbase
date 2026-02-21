@@ -7,14 +7,14 @@ import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | OfficeBase",
-    default: "OfficeBase — Premium Office Project Aggregator",
+    template: "%s | LogisticsBase",
+    default: "LogisticsBase — Premium Office Project Aggregator",
   },
   description:
     "Discover and compare the finest office projects across the city. Grade A offices, co-working spaces, and mixed-use developments.",
   keywords: ["office", "commercial real estate", "office space", "Grade A"],
   openGraph: {
-    title: "OfficeBase",
+    title: "LogisticsBase",
     description: "Premium Office Project Aggregator",
     type: "website",
   },

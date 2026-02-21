@@ -43,18 +43,18 @@ export default async function HomePage() {
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6 animate-fade-up">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-gold)]" />
               <span className="text-sm text-white/80 font-medium">
-                Premium Office Project Intelligence
+                Premium logistics Project Intelligence
               </span>
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-4 animate-fade-up stagger-1">
               Find Your Next
               <br />
-              <em className="not-italic text-[var(--brand-gold)]">Office Space</em>
+              <em className="not-italic text-[var(--brand-gold)]">logistics Space</em>
             </h1>
 
             <p className="text-base text-white/70 leading-relaxed mb-6 max-w-xl animate-fade-up stagger-2">
-              Curated Grade A offices, co-working spaces, and mixed-use developments. Compare projects, explore on the map, and connect with developers directly.
+              Curated Grade A logisticss, co-working spaces, and mixed-use developments. Compare projects, explore on the map, and connect with developers directly.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 animate-fade-up stagger-3">
@@ -175,13 +175,13 @@ export default async function HomePage() {
       <section className="py-20 bg-[var(--brand-navy)] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-display text-4xl mb-4">
-            List Your Project on OfficeBase
+            List Your Project on LogisticsBase
           </h2>
           <p className="text-white/70 mb-8 leading-relaxed">
-            Are you a developer or broker? Get your office project in front of serious tenants and investors. All listings are manually curated for quality.
+            Are you a developer or broker? Get your logistics project in front of serious tenants and investors. All listings are manually curated for quality.
           </p>
           <a
-            href="mailto:listings@officebase.com"
+            href="mailto:listings@logisticsbase.com"
             className="inline-flex items-center gap-2 px-6 py-3.5 bg-[var(--brand-gold)] text-white font-medium rounded-xl hover:bg-[var(--brand-gold)]/90 transition-all"
           >
             Contact Us to List

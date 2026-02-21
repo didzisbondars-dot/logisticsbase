@@ -59,7 +59,7 @@ export default function ProjectsPage() {
         {/* Page header */}
         <div className="bg-[var(--brand-navy)] pt-24 pb-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="font-display text-4xl text-white mb-2">Office Projects</h1>
+            <h1 className="font-display text-4xl text-white mb-2">Logistics & Industrial</h1>
             <p className="text-white/60 text-sm">
               {loading ? "Loading..." : `${total} project${total !== 1 ? "s" : ""} available`}
             </p>
