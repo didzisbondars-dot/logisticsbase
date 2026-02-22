@@ -23,6 +23,14 @@ export interface Project {
   floors: number;
   completionDate?: string;
   description: string;
+  expansion?: number | null;
+  loading?: string | null;
+  certificate?: string | null;
+  ceilingHeight?: number | null;
+  columnGrid?: string | null;
+  floorLoad?: string | null;
+  sprinklers?: string | null;
+  land?: string | null;
   amenities: string[];
   certifications: string[];
   featured: boolean;

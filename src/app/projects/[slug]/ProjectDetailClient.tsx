@@ -21,15 +21,24 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
     return () => clearTimeout(t);
   }, []);
 
+  const p = project as any;
   const stats = [
-    { label: "Total GBA", value: project.totalArea ? formatArea(project.totalArea) : null },
-    { label: "Vacancy", value: project.minUnitSize ? formatArea(project.minUnitSize) : null },
-    { label: "Available", value: (project as any).availableArea ? formatArea((project as any).availableArea) : null },
-    { label: "Owner", value: project.developer || null },
-    { label: "District", value: project.district || null },
+    { label: "Total Area", value: project.totalArea ? formatArea(project.totalArea) : null },
+    { label: "Vacancy", value: p.availableArea ? formatArea(p.availableArea) : null },
+    { label: "Expansion", value: p.expansion ? formatArea(p.expansion) : null },
+    { label: "Address", value: project.address || null },
+    { label: "Area", value: project.district || null },
+    { label: "Status", value: project.status || null },
     { label: "Class", value: project.propertyType ? `Class ${project.propertyType}` : null },
-    { label: "Ceiling Height (m)", value: (project as any).parkingGround ? `${(project as any).parkingGround} spaces` : null },
-    { label: "Underground", value: (project as any).parkingUnderground ? `${(project as any).parkingUnderground} spaces` : null },
+    { label: "Ceiling Height", value: p.ceilingHeight ? `${p.ceilingHeight} m` : null },
+    { label: "Loading", value: p.loading || null },
+    { label: "Column Grid", value: p.columnGrid || null },
+    { label: "Floor Load", value: p.floorLoad || null },
+    { label: "Sprinklers", value: p.sprinklers || null },
+    { label: "Certificate", value: p.certificate || null },
+    { label: "Construction Date", value: project.completionDate ? String(project.completionDate) : null },
+    { label: "Asking Rent", value: project.rentPricePerSqm && project.rentPricePerSqm > 0 ? `€${project.rentPricePerSqm}/sqm/mo` : null },
+    { label: "Land", value: p.land || null },
   ].filter(s => s.value);
 
   return (
@@ -132,16 +141,6 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
             {/* Stats — editorial horizontal list */}
             <div className={`fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '250ms' }}>
-              {!!project.rentPricePerSqm && project.rentPricePerSqm > 0 && (
-                <div className="mb-8 pb-8 border-b border-black/8">
-                  <p className="font-dm text-[10px] tracking-[0.2em] uppercase text-black/35 mb-1">Asking Rent Rate</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-cormorant text-[#1a1a1a]" style={{ fontSize: '4rem', fontWeight: 300, lineHeight: 1 }}>€{project.rentPricePerSqm}</span>
-                    <span className="font-dm text-xs text-black/35 tracking-wider">/ sqm / month</span>
-                  </div>
-                </div>
-              )}
-
               <div className="grid grid-cols-2 md:grid-cols-3 gap-0">
                 {stats.map((s, i) => (
                   <div key={s.label} className="stat-item py-4 pr-6">
