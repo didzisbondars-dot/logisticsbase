@@ -53,82 +53,92 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         .stat-item:last-child { border-bottom: none; }
         .img-thumb { transition: opacity 0.2s; }
         .img-thumb:hover { opacity: 1 !important; }
+        .magnetic { transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .magnetic:hover { transform: scale(1.03); }
+        .lift:hover { transform: translateY(-1px); transition: transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .btn-slide { position: relative; overflow: hidden; }
+        .btn-slide span.bg { position: absolute; inset: 0; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94); background: rgba(255,255,255,0.12); }
+        .btn-slide:hover span.bg { transform: translateX(0); }
       `}</style>
 
-      {/* Full viewport hero */}
-      <div className="relative w-full" style={{ height: '100vh', maxHeight: '780px', minHeight: '520px' }}>
+      {/* Top nav bar — above image, full width */}
+      <div className={`max-w-7xl mx-auto px-6 md:px-14 pt-8 flex items-center justify-between fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '0ms' }}>
+        <Link href="/projects" className="font-dm lift inline-flex items-center gap-2 text-black/40 hover:text-black text-xs tracking-widest uppercase transition-colors">
+          <ArrowLeft className="w-3.5 h-3.5" /> All Projects
+        </Link>
+        <DownloadPDF project={project} />
+      </div>
 
-        {/* Image */}
-        {images.length > 0 ? (
-          <Image src={images[imgIndex].url} alt={project.name} fill className="object-cover" priority />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d]" />
-        )}
+      {/* Hero image — constrained width, grey sides */}
+      <div className="w-full mt-6" style={{ background: '#e8e8e8' }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-14">
+          <div className="relative rounded-xl overflow-hidden" style={{ height: 'clamp(320px, 52vw, 600px)' }}>
 
-        {/* Gradient overlay — heavier at bottom for text legibility */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.88) 100%)' }} />
-
-        {/* Top bar */}
-        <div className={`absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-8 pt-8 fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '0ms' }}>
-          <Link href="/projects" className="font-dm inline-flex items-center gap-2 text-white/70 hover:text-white text-xs tracking-widest uppercase transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" /> All Projects
-          </Link>
-          <DownloadPDF project={project} />
-        </div>
-
-        {/* Image counter + gallery trigger */}
-        {images.length > 1 && (
-          <button onClick={() => setGalleryOpen(true)} className={`font-dm absolute top-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 text-white/60 hover:text-white text-xs tracking-widest uppercase transition-colors fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '100ms' }}>
-            <Images className="w-3.5 h-3.5" />
-            {imgIndex + 1} / {images.length}
-          </button>
-        )}
-
-        {/* Arrow navigation */}
-        {images.length > 1 && (
-          <>
-            <button onClick={() => setImgIndex(i => (i - 1 + images.length) % images.length)} className="absolute left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/20 bg-black/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/40 transition-all">
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button onClick={() => setImgIndex(i => (i + 1) % images.length)} className="absolute right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/20 bg-black/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/40 transition-all">
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </>
-        )}
-
-        {/* Bottom hero content */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 px-8 md:px-14 pb-10">
-          <div className="max-w-7xl mx-auto">
-            <div className={`fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '120ms' }}>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-dm inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-white/25 text-white/80 backdrop-blur-sm">
-                  <span className={cn("w-1.5 h-1.5 rounded-full", getStatusDot(project.status))} />
-                  {project.status}
-                </span>
-                <span className="font-dm text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full text-white/80" style={{ background: 'rgba(200,136,42,0.7)', backdropFilter: 'blur(8px)' }}>
-                  Class {project.propertyType}
-                </span>
-              </div>
-              <h1 className="font-cormorant text-white mb-3 leading-none" style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)', fontWeight: 300, letterSpacing: '-0.01em' }}>
-                {project.name}
-              </h1>
-              <p className="font-dm text-white/55 text-xs tracking-widest uppercase flex items-center gap-2">
-                <MapPin className="w-3 h-3" />
-                {project.address}{project.district ? `, ${project.district}` : ""}, Riga
-              </p>
-            </div>
-
-            {/* Thumbnail strip */}
-            {images.length > 1 && (
-              <div className={`flex gap-2 mt-5 fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '200ms' }}>
-                {images.slice(0, 6).map((img, i) => (
-                  <button key={img.id} onClick={() => setImgIndex(i)} className={cn("relative w-14 h-9 rounded overflow-hidden shrink-0 transition-all img-thumb", i === imgIndex ? "ring-2 ring-[#c8882a] opacity-100" : "opacity-40")}>
-                    <Image src={img.url} alt="" fill className="object-cover" />
-                  </button>
-                ))}
-              </div>
+            {/* Image — contain so no stretching, grey bg shows sides */}
+            {images.length > 0 ? (
+              <Image src={images[imgIndex].url} alt={project.name} fill className="object-contain" priority />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#3d3d3d]" />
             )}
+
+            {/* Gradient overlay — only bottom for text */}
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.85) 100%)' }} />
+
+            {/* Image counter + gallery trigger */}
+            {images.length > 1 && (
+              <button onClick={() => setGalleryOpen(true)} className="magnetic btn-slide font-dm absolute top-4 right-4 z-20 flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest uppercase bg-black/30 backdrop-blur-sm px-3 py-2 rounded-full">
+                <span className="bg" />
+                <Images className="w-3.5 h-3.5 relative z-10" />
+                <span className="relative z-10">{imgIndex + 1} / {images.length}</span>
+              </button>
+            )}
+
+            {/* Arrow navigation */}
+            {images.length > 1 && (
+              <>
+                <button onClick={() => setImgIndex(i => (i - 1 + images.length) % images.length)} className="magnetic btn-slide absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/25 backdrop-blur-sm flex items-center justify-center text-white">
+                  <span className="bg" /><ChevronLeft className="w-4 h-4 relative z-10" />
+                </button>
+                <button onClick={() => setImgIndex(i => (i + 1) % images.length)} className="magnetic btn-slide absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/25 backdrop-blur-sm flex items-center justify-center text-white">
+                  <span className="bg" /><ChevronRight className="w-4 h-4 relative z-10" />
+                </button>
+              </>
+            )}
+
+            {/* Bottom hero content */}
+            <div className="absolute bottom-0 left-0 right-0 z-10 p-6 md:p-8">
+              <div className={`fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '120ms' }}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="font-dm inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-white/25 text-white/80 backdrop-blur-sm">
+                    <span className={cn("w-1.5 h-1.5 rounded-full", getStatusDot(project.status))} />
+                    {project.status}
+                  </span>
+                  <span className="font-dm text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full text-white/80" style={{ background: 'rgba(200,136,42,0.7)', backdropFilter: 'blur(8px)' }}>
+                    Class {project.propertyType}
+                  </span>
+                </div>
+                <h1 className="font-cormorant text-white mb-2 leading-none" style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', fontWeight: 300, letterSpacing: '-0.01em' }}>
+                  {project.name}
+                </h1>
+                <p className="font-dm text-white/55 text-xs tracking-widest uppercase flex items-center gap-2">
+                  <MapPin className="w-3 h-3" />
+                  {project.address}{project.district ? `, ${project.district}` : ""}, Riga
+                </p>
+              </div>
+
+            </div>
           </div>
+
+          {/* Thumbnail strip — below image, same width */}
+          {images.length > 1 && (
+            <div className={`flex gap-2 py-3 fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '200ms' }}>
+              {images.slice(0, 8).map((img, i) => (
+                <button key={img.id} onClick={() => setImgIndex(i)} className={cn("magnetic relative w-16 h-10 rounded overflow-hidden shrink-0 img-thumb", i === imgIndex ? "ring-2 ring-[#c8882a] opacity-100" : "opacity-35")}>
+                  <Image src={img.url} alt="" fill className="object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
