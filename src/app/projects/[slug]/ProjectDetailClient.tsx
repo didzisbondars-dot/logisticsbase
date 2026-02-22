@@ -96,11 +96,25 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             {/* Arrow navigation */}
             {images.length > 1 && (
               <>
-                <button onClick={() => setImgIndex(i => (i - 1 + images.length) % images.length)} className="magnetic btn-slide absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/25 backdrop-blur-sm flex items-center justify-center text-white">
-                  <span className="bg" /><ChevronLeft className="w-4 h-4 relative z-10" />
+                <button
+                  onClick={() => setImgIndex(i => (i - 1 + images.length) % images.length)}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 group flex items-center gap-2 pl-3 pr-4 py-2.5 rounded-full text-white text-xs tracking-widest uppercase font-dm"
+                  style={{ background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)', transition: 'all 0.3s cubic-bezier(0.25,0.46,0.45,0.94)' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.65)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1.04)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1)'; }}
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span>Prev</span>
                 </button>
-                <button onClick={() => setImgIndex(i => (i + 1) % images.length)} className="magnetic btn-slide absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/25 backdrop-blur-sm flex items-center justify-center text-white">
-                  <span className="bg" /><ChevronRight className="w-4 h-4 relative z-10" />
+                <button
+                  onClick={() => setImgIndex(i => (i + 1) % images.length)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 group flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-full text-white text-xs tracking-widest uppercase font-dm"
+                  style={{ background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)', transition: 'all 0.3s cubic-bezier(0.25,0.46,0.45,0.94)' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.65)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1.04)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1)'; }}
+                >
+                  <span>Next</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </>
             )}
@@ -155,7 +169,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 {stats.map((s, i) => (
                   <div key={s.label} className="stat-item py-4 pr-6">
                     <p className="font-dm text-[9px] tracking-[0.22em] uppercase text-black/35 mb-1">{s.label}</p>
-                    <p className="font-cormorant text-[#1a1a1a]" style={{ fontSize: '1.3rem', fontWeight: 400 }}>{s.value}</p>
+                    <p className="font-cormorant text-[#1a1a1a]" style={{ fontSize: '1.05rem', fontWeight: 400 }}>{s.value}</p>
                   </div>
                 ))}
               </div>
@@ -165,7 +179,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             {project.description && (
               <div className={`fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '300ms' }}>
                 <p className="font-dm text-[10px] tracking-[0.2em] uppercase text-black/30 mb-4">About</p>
-                <p className="font-dm text-[#3a3a3a] leading-relaxed" style={{ fontSize: '0.9rem', fontWeight: 300 }}>{project.description}</p>
+                <p className="font-dm text-[#3a3a3a] leading-relaxed" style={{ fontSize: '1.05rem', fontWeight: 400, lineHeight: 1.75 }}>{project.description}</p>
               </div>
             )}
 
