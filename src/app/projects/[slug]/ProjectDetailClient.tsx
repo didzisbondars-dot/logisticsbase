@@ -200,7 +200,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <div className={`fade-up ${loaded ? 'in' : ''}`} style={{ transitionDelay: '380ms' }}>
                 <p className="font-dm text-[10px] tracking-[0.2em] uppercase text-black/30 mb-4">Location</p>
                 <div className="relative rounded-xl" style={{ height: '340px', overflow: 'hidden' }}>
-                  <MapboxMap latitude={project.latitude} longitude={project.longitude} zoom={12} />
+                  <MapboxMap latitude={project.latitude} longitude={project.longitude} zoom={10} />
                   <a href={`https://www.google.com/maps?q=${project.latitude},${project.longitude}`} target="_blank" rel="noopener noreferrer" className="font-dm absolute bottom-4 right-4 z-10 bg-white text-[10px] tracking-widest uppercase px-4 py-2 rounded-full shadow-lg text-[#1a1a1a] hover:bg-[#f8f6f2] transition-all">
                     Open Maps ↗
                   </a>

@@ -8,7 +8,7 @@ interface MapboxMapProps {
   zoom?: number;
 }
 
-export function MapboxMap({ latitude, longitude, zoom = 12 }: MapboxMapProps) {
+export function MapboxMap({ latitude, longitude, zoom = 10 }: MapboxMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
 
