@@ -24,11 +24,11 @@ export function DownloadPDF({ project }: { project: Project }) {
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(18);
       doc.setFont("helvetica", "bold");
-      doc.text("OfficeBase", M, 18);
+      doc.text("LogisticsBase", M, 18);
       doc.setFontSize(8);
       doc.setFont("helvetica", "normal");
       doc.setTextColor(180, 180, 180);
-      doc.text("Commercial Real Estate · Riga", M, 25);
+      doc.text("Logistics & Industrial · Riga", M, 25);
       doc.setTextColor(200, 136, 42);
       doc.setFontSize(8);
       doc.text(new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }), W - M, 18, { align: "right" });
@@ -147,7 +147,7 @@ export function DownloadPDF({ project }: { project: Project }) {
       doc.setTextColor(180, 180, 180);
       doc.setFontSize(7);
       doc.setFont("helvetica", "normal");
-      doc.text("officebase.vercel.app  ·  Commercial Real Estate Riga", W / 2, 291, { align: "center" });
+      doc.text("logisticsbase.vercel.app  ·  Logistics & Industrial Riga", W / 2, 291, { align: "center" });
 
       doc.save(`${project.name.replace(/[^a-z0-9]/gi, "-").toLowerCase()}.pdf`);
     } catch (err) {
